@@ -14,4 +14,8 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         myConn = New SqlConnection("Data Source=COMP68\SQLEXPRESS01;Initial Catalog=sample;Persist Security Info=True;User ID=posnabulok;Password=passwordto;")
     End Sub
+
+    Private Sub btLogin_Click(sender As Object, e As EventArgs) Handles btLogin.Click
+
+    End Sub
 End Class
