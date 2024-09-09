@@ -37,12 +37,13 @@ Partial Class inventory
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.pictureBOX = New System.Windows.Forms.PictureBox()
         Me.btnEDIT = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictureBOX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -102,7 +103,7 @@ Partial Class inventory
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Controls.Add(Me.PictureBox1)
+        Me.Panel1.Controls.Add(Me.pictureBOX)
         Me.Panel1.Location = New System.Drawing.Point(585, 37)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(203, 401)
@@ -178,13 +179,13 @@ Partial Class inventory
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "Category"
         '
-        'PictureBox1
+        'pictureBOX
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(33, 16)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(145, 125)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.pictureBOX.Location = New System.Drawing.Point(33, 16)
+        Me.pictureBOX.Name = "pictureBOX"
+        Me.pictureBOX.Size = New System.Drawing.Size(145, 125)
+        Me.pictureBOX.TabIndex = 0
+        Me.pictureBOX.TabStop = False
         '
         'btnEDIT
         '
@@ -194,6 +195,10 @@ Partial Class inventory
         Me.btnEDIT.TabIndex = 8
         Me.btnEDIT.Text = "EDIT PRODUCT"
         Me.btnEDIT.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'inventory
         '
@@ -211,7 +216,7 @@ Partial Class inventory
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictureBOX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -224,7 +229,7 @@ Partial Class inventory
     Friend WithEvents tbPrice As TextBox
     Friend WithEvents tbQuantity As TextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents pictureBOX As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
@@ -233,4 +238,5 @@ Partial Class inventory
     Friend WithEvents lbID As Label
     Friend WithEvents tbPID As TextBox
     Friend WithEvents btnEDIT As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

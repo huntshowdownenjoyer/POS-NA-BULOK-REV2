@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class inventory
     Private myConnString As String = "Data Source=COMP68\SQLEXPRESS01;Initial Catalog=DBNABULOK;Persist Security Info=True;User ID=posnabulok;Password=passwordto"
@@ -32,6 +33,8 @@ Public Class inventory
         Dim category = tbCategory.Text
         Dim price As Decimal
         Dim quantity As Integer
+        Dim imageData As Byte()
+
 
         If Not Decimal.TryParse(tbPrice.Text, price) Then
             MessageBox.Show("Please enter a valid price.")
@@ -43,7 +46,18 @@ Public Class inventory
             Return
         End If
 
-        Dim query As String = "INSERT INTO [dbo].[INVENTORYNABULOK1] ([PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY]) VALUES (@ProductName, @Category, @Price, @Quantity)"
+
+        If pictureBOX.Image IsNot Nothing Then
+            Using ms As New MemoryStream()
+                pictureBOX.Image.Save(ms, pictureBOX.Image.RawFormat)
+                imageData = ms.ToArray()
+            End Using
+        Else
+            imageData = Nothing
+        End If
+
+
+        Dim query As String = "INSERT INTO [dbo].[INVENTORYNABULOK1] ([PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY], [IMAGE]) VALUES (@ProductName, @Category, @Price, @Quantity, @Image)"
 
         Try
             Using myConn As New SqlConnection(myConnString)
@@ -52,6 +66,7 @@ Public Class inventory
                     myCmd.Parameters.AddWithValue("@Category", category)
                     myCmd.Parameters.AddWithValue("@Price", price)
                     myCmd.Parameters.AddWithValue("@Quantity", quantity)
+                    myCmd.Parameters.AddWithValue("@Image", If(imageData, DBNull.Value))
 
                     myConn.Open()
                     Dim result As Integer = myCmd.ExecuteNonQuery()
@@ -87,10 +102,9 @@ Public Class inventory
     End Sub
 
     Private Sub btnEDIT_Click(sender As Object, e As EventArgs) Handles btnEDIT.Click
-
         Dim ID As Integer
         If Not Integer.TryParse(tbPID.Text, ID) Then
-            MessageBox.Show("Hindi int id mo bobo.")
+            MessageBox.Show("Invalid ID format.")
             Return
         End If
 
@@ -98,6 +112,7 @@ Public Class inventory
         Dim category = tbCategory.Text
         Dim price As Decimal
         Dim quantity As Integer
+
 
         If Not Decimal.TryParse(tbPrice.Text, price) Then
             MessageBox.Show("Please enter a valid price.")
@@ -109,7 +124,7 @@ Public Class inventory
             Return
         End If
 
-        Dim query As String = "UPDATE [dbo].[INVENTORYNABULOK1] SET [PRODUCT_NAME] = @productNAME ,[PRICE] = @price ,[QUANTITY] = @quantity ,[CATEGORY] = @category WHERE PRODUCT_ID = @ID "
+        Dim query As String = "UPDATE [dbo].[INVENTORYNABULOK1] SET [PRODUCT_NAME] = @ProductName, [PRICE] = @Price, [QUANTITY] = @Quantity, [CATEGORY] = @Category WHERE PRODUCT_ID = @ID"
 
         Try
             Using myConn As New SqlConnection(myConnString)
@@ -139,7 +154,7 @@ Public Class inventory
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim ID As Integer
         If Not Integer.TryParse(tbPID.Text, ID) Then
-            MessageBox.Show("Hindi int id mo bobo.")
+            MessageBox.Show("Invalid ID format.")
             Return
         End If
 
@@ -164,5 +179,11 @@ Public Class inventory
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub pictureBOX_Click(sender As Object, e As EventArgs) Handles pictureBOX.Click
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            pictureBOX.Image = Image.FromFile(OpenFileDialog1.FileName)
+        End If
     End Sub
 End Class
