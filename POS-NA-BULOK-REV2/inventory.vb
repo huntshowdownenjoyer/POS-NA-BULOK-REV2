@@ -8,7 +8,7 @@ Public Class inventory
     End Sub
 
     Private Sub LoadDataGridView()
-        Dim query As String = "SELECT [PRODUCT_ID], [PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY] FROM [dbo].[INVENTORYNABULOK]"
+        Dim query As String = "SELECT [PRODUCT_ID], [PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY] FROM [dbo].[INVENTORYNABULOK1]"
 
         Try
             Using myConn As New SqlConnection(myConnString)
@@ -43,7 +43,7 @@ Public Class inventory
             Return
         End If
 
-        Dim query As String = "INSERT INTO [dbo].[INVENTORYNABULOK] ([PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY]) VALUES (@ProductName, @Category, @Price, @Quantity)"
+        Dim query As String = "INSERT INTO [dbo].[INVENTORYNABULOK1] ([PRODUCT_NAME], [CATEGORY], [PRICE], [QUANTITY]) VALUES (@ProductName, @Category, @Price, @Quantity)"
 
         Try
             Using myConn As New SqlConnection(myConnString)
@@ -109,7 +109,7 @@ Public Class inventory
             Return
         End If
 
-        Dim query As String = "UPDATE [dbo].[INVENTORYNABULOK] SET [PRODUCT_NAME] = @productNAME ,[PRICE] = @price ,[QUANTITY] = @quantity ,[CATEGORY] = @category WHERE PRODUCT_ID = @ID "
+        Dim query As String = "UPDATE [dbo].[INVENTORYNABULOK1] SET [PRODUCT_NAME] = @productNAME ,[PRICE] = @price ,[QUANTITY] = @quantity ,[CATEGORY] = @category WHERE PRODUCT_ID = @ID "
 
         Try
             Using myConn As New SqlConnection(myConnString)
@@ -143,7 +143,7 @@ Public Class inventory
             Return
         End If
 
-        Dim query As String = "DELETE FROM [dbo].[INVENTORYNABULOK] WHERE PRODUCT_ID = @ID"
+        Dim query As String = "DELETE FROM [dbo].[INVENTORYNABULOK1] WHERE PRODUCT_ID = @ID"
 
         Try
             Using myConn As New SqlConnection(myConnString)
