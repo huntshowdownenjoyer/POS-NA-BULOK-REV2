@@ -27,6 +27,7 @@ Partial Class Form1
         Me.lbPword = New System.Windows.Forms.Label()
         Me.tbUname = New System.Windows.Forms.TextBox()
         Me.tbPword = New System.Windows.Forms.TextBox()
+        Me.cbInventory = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'btLogin
@@ -70,11 +71,22 @@ Partial Class Form1
         Me.tbPword.Size = New System.Drawing.Size(100, 20)
         Me.tbPword.TabIndex = 4
         '
+        'cbInventory
+        '
+        Me.cbInventory.AutoSize = True
+        Me.cbInventory.Location = New System.Drawing.Point(255, 194)
+        Me.cbInventory.Name = "cbInventory"
+        Me.cbInventory.Size = New System.Drawing.Size(81, 17)
+        Me.cbInventory.TabIndex = 5
+        Me.cbInventory.Text = "CheckBox1"
+        Me.cbInventory.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.cbInventory)
         Me.Controls.Add(Me.tbPword)
         Me.Controls.Add(Me.tbUname)
         Me.Controls.Add(Me.lbPword)
@@ -92,4 +104,5 @@ Partial Class Form1
     Friend WithEvents lbPword As Label
     Friend WithEvents tbUname As TextBox
     Friend WithEvents tbPword As TextBox
+    Friend WithEvents cbInventory As CheckBox
 End Class

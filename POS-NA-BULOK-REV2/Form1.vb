@@ -20,14 +20,20 @@ Public Class Form1
             Dim command As New SqlCommand(query, myConn)
             Dim result As Integer = Convert.ToInt32(command.ExecuteScalar())
 
-            If result > 0 Then
+            If result > 0 And cbInventory.Checked Then
                 MessageBox.Show("Login successful!")
-                inventory.Show()
+                Inventory.Show()
+                Me.Hide()
+                myConn.Close()
+            ElseIf result > 0 Then
+                MessageBox.Show("Login successful!")
+                home.Show()
                 Me.Hide()
                 myConn.Close()
             Else
                 MessageBox.Show("Invalid username or password.")
                 myConn.Close()
+
             End If
 
         Catch ex As Exception

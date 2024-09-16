@@ -21,7 +21,10 @@ Public Class Inventory
                         myAdapter.Fill(myDataTable)
                         DataGridView1.DataSource = myDataTable
 
-                        ' Hide the IMAGE column
+                        ' Hide the last blank row by setting AllowUserToAddRows to False
+                        DataGridView1.AllowUserToAddRows = False
+
+                        ' Optionally, hide the IMAGE column if it is still present
                         If DataGridView1.Columns.Contains("IMAGE") Then
                             DataGridView1.Columns("IMAGE").Visible = False
                         End If
