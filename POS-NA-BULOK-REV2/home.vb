@@ -31,7 +31,6 @@ Public Class home
                     ' Use ProductControl instead of Item
                     Dim productControl As New ProductControl(productName, productPrice, productPicture)
                     FlowLayoutPanel1.Controls.Add(productControl)
-                    Console.WriteLine(productName)
                 End While
 
                 reader.Close()
@@ -44,4 +43,5 @@ Public Class home
     Private Sub home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadProducts() ' Call LoadProducts when the form loads
     End Sub
+
 End Class

@@ -200,7 +200,7 @@ Partial Class Inventory
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'inventory
+        'Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -210,7 +210,7 @@ Partial Class Inventory
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnADD)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Name = "inventory"
+        Me.Name = "Inventory"
         Me.Text = "inventory"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
