@@ -27,7 +27,7 @@ Public Class Form1
                 myConn.Close()
             ElseIf result > 0 Then
                 MessageBox.Show("Login successful!")
-                home.Show()
+                home1.Show()
                 Me.Hide()
                 myConn.Close()
             Else
@@ -40,5 +40,7 @@ Public Class Form1
             MessageBox.Show("An error occurred: " & ex.Message)
         End Try
     End Sub
+
+
 End Class
 

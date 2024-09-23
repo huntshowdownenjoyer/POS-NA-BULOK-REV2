@@ -1,6 +1,10 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports USB_Barcode_Scanner
+Imports System.Text.RegularExpressions
+Imports ZXing
+Imports System.Drawing
+
 
 Public Class home1
     Private myConnString As String = "Data Source=COMP68\SQLEXPRESS01;Initial Catalog=DBNABULOK;Persist Security Info=True;User ID=posnabulok;Password=passwordto"
@@ -25,6 +29,7 @@ Public Class home1
         DataGridView1.Columns.Add("ProductName", "Product Name")
         DataGridView1.Columns.Add("ProductPrice", "Product Price")
         DataGridView1.Columns.Add("ProductQuantity", "Product Quantity")
+        DataGridView1.Columns.Add("PRODUCT_ID", "PRODUCT_ID")
 
         With DataGridView1
             .BackgroundColor = Color.White
@@ -60,6 +65,14 @@ Public Class home1
                             PRODUCT_PRICE = Convert.ToInt32(reader("PRICE"))
                             PRODUCT_QUANTITY = Convert.ToInt32(reader("QUANTITY"))
                             PRODUCT_CATEGORY = reader("CATEGORY").ToString()
+
+                            Dim barcodeWriter As New BarcodeWriter()
+                            barcodeWriter.Format = BarcodeFormat.CODE_128
+                            barcodeWriter.Options = New ZXing.Common.EncodingOptions With {.Width = 250, .Height = 250}
+                            Dim resultBitmap As Bitmap = barcodeWriter.Write(PRODUCT_ID)
+                            pbBarcode.Image = resultBitmap
+
+
 
                             If Not IsDBNull(reader("IMAGE")) Then
                                 Dim imgData As Byte() = CType(reader("IMAGE"), Byte())
@@ -99,7 +112,7 @@ Public Class home1
             Return
         End If
 
-        Dim row As String() = New String() {PRODUCT_NAME, PRODUCT_PRICE.ToString("C"), quantity.ToString()}
+        Dim row As String() = New String() {PRODUCT_NAME, PRODUCT_PRICE.ToString("C"), quantity.ToString(), PRODUCT_ID.ToString}
         DataGridView1.Rows.Add(row)
         totalPrice += PRODUCT_PRICE * quantity
         lbTotalPrice.Text = totalPrice.ToString("C")
@@ -140,7 +153,83 @@ Public Class home1
         barcodeScanner = New BarcodeScanner(tbSearchId)
     End Sub
 
-    Private Sub barcodeScanner_BarcodeScanned(sender As Object, e As BarcodeScannerEventArgs) Handles barcodeScanner.BarcodeScanned
-        tbSearchId.Text = e.Barcode
+
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        If e.RowIndex >= 0 Then
+            Dim selectedRowId As String = DataGridView1.SelectedRows(0).Cells("PRODUCT_ID").Value.ToString()
+
+            Dim query As String = "SELECT * FROM [dbo].[INVENTORYNABULOK1] WHERE [PRODUCT_ID] = @ProductID"
+
+            Try
+                Using myConn As New SqlConnection(myConnString)
+                    Using myCmd As New SqlCommand(query, myConn)
+                        myCmd.Parameters.AddWithValue("@ProductID", selectedRowId)
+                        myConn.Open()
+
+                        Using reader As SqlDataReader = myCmd.ExecuteReader()
+                            If reader.Read() Then
+                                PRODUCT_ID = reader("PRODUCT_ID").ToString()
+                                PRODUCT_NAME = reader("PRODUCT_NAME").ToString()
+                                PRODUCT_PRICE = Convert.ToInt32(reader("PRICE"))
+                                PRODUCT_QUANTITY = Convert.ToInt32(reader("QUANTITY"))
+                                PRODUCT_CATEGORY = reader("CATEGORY").ToString()
+
+                                Dim barcodeWriter As New BarcodeWriter()
+                                barcodeWriter.Format = BarcodeFormat.CODE_128
+                                barcodeWriter.Options = New ZXing.Common.EncodingOptions With {.Width = 250, .Height = 250}
+                                Dim resultBitmap As Bitmap = barcodeWriter.Write(PRODUCT_ID)
+                                pbBarcode.Image = resultBitmap
+
+                                If Not IsDBNull(reader("IMAGE")) Then
+                                    Dim imgData As Byte() = CType(reader("IMAGE"), Byte())
+                                    Using ms As New MemoryStream(imgData)
+                                        PRODUCT_IMAGE = Image.FromStream(ms)
+                                    End Using
+                                End If
+
+                                UpdateUI()
+                            Else
+                                MessageBox.Show("Product not found.")
+                            End If
+                        End Using
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("An error occurred while loading the product: " & ex.Message)
+            End Try
+        Else
+            MessageBox.Show("Please select a valid row.")
+        End If
     End Sub
+
+
+
+    Private Sub btnPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
+        Dim totalPrice As Double
+        Dim payment As Double
+
+        Dim totalPriceText As String = Regex.Replace(lbTotalPrice.Text.Trim(), "[^\d.]", "")
+
+        If Double.TryParse(totalPriceText, totalPrice) Then
+
+            Dim paymentText As String = Regex.Replace(tbPayment.Text.Trim(), "[^\d.]", "")
+
+            If Double.TryParse(paymentText, payment) Then
+                Dim change As Double = payment - totalPrice
+                lbChange.Text = change.ToString("F2")
+            Else
+                MessageBox.Show("Please enter a valid numeric value for payment.")
+            End If
+        Else
+            MessageBox.Show("Please enter a valid numeric value for total price.")
+        End If
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        Me.Hide()
+        Form1.Show()
+    End Sub
+
+
 End Class

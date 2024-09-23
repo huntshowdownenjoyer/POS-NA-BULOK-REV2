@@ -223,4 +223,5 @@ Public Class Inventory
             pictureBOX.Image = Image.FromFile(OpenFileDialog1.FileName)
         End If
     End Sub
+
 End Class
