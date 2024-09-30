@@ -42,6 +42,8 @@ Partial Class home1
         Me.btnPay = New System.Windows.Forms.Button()
         Me.lbChange = New System.Windows.Forms.Label()
         Me.btnLogout = New System.Windows.Forms.Button()
+        Me.lbTax = New System.Windows.Forms.Label()
+        Me.lbTotalVat = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.pbProductImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,7 +129,7 @@ Partial Class home1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(423, 21)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(365, 257)
+        Me.DataGridView1.Size = New System.Drawing.Size(365, 202)
         Me.DataGridView1.TabIndex = 2
         '
         'btnAdd
@@ -151,7 +153,7 @@ Partial Class home1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(730, 306)
+        Me.Label1.Location = New System.Drawing.Point(731, 239)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(57, 13)
         Me.Label1.TabIndex = 5
@@ -160,7 +162,7 @@ Partial Class home1
         'lbTotalPrice
         '
         Me.lbTotalPrice.AutoSize = True
-        Me.lbTotalPrice.Location = New System.Drawing.Point(739, 334)
+        Me.lbTotalPrice.Location = New System.Drawing.Point(740, 267)
         Me.lbTotalPrice.Name = "lbTotalPrice"
         Me.lbTotalPrice.Size = New System.Drawing.Size(39, 13)
         Me.lbTotalPrice.TabIndex = 6
@@ -175,7 +177,7 @@ Partial Class home1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(423, 282)
+        Me.btnDelete.Location = New System.Drawing.Point(423, 229)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 8
@@ -193,14 +195,14 @@ Partial Class home1
         '
         'tbPayment
         '
-        Me.tbPayment.Location = New System.Drawing.Point(688, 350)
+        Me.tbPayment.Location = New System.Drawing.Point(688, 328)
         Me.tbPayment.Name = "tbPayment"
         Me.tbPayment.Size = New System.Drawing.Size(100, 20)
         Me.tbPayment.TabIndex = 10
         '
         'btnPay
         '
-        Me.btnPay.Location = New System.Drawing.Point(713, 415)
+        Me.btnPay.Location = New System.Drawing.Point(713, 367)
         Me.btnPay.Name = "btnPay"
         Me.btnPay.Size = New System.Drawing.Size(75, 23)
         Me.btnPay.TabIndex = 11
@@ -210,7 +212,7 @@ Partial Class home1
         'lbChange
         '
         Me.lbChange.AutoSize = True
-        Me.lbChange.Location = New System.Drawing.Point(739, 387)
+        Me.lbChange.Location = New System.Drawing.Point(748, 351)
         Me.lbChange.Name = "lbChange"
         Me.lbChange.Size = New System.Drawing.Size(39, 13)
         Me.lbChange.TabIndex = 12
@@ -225,11 +227,31 @@ Partial Class home1
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = True
         '
+        'lbTax
+        '
+        Me.lbTax.AutoSize = True
+        Me.lbTax.Location = New System.Drawing.Point(740, 291)
+        Me.lbTax.Name = "lbTax"
+        Me.lbTax.Size = New System.Drawing.Size(39, 13)
+        Me.lbTax.TabIndex = 14
+        Me.lbTax.Text = "Label2"
+        '
+        'lbTotalVat
+        '
+        Me.lbTotalVat.AutoSize = True
+        Me.lbTotalVat.Location = New System.Drawing.Point(740, 312)
+        Me.lbTotalVat.Name = "lbTotalVat"
+        Me.lbTotalVat.Size = New System.Drawing.Size(39, 13)
+        Me.lbTotalVat.TabIndex = 15
+        Me.lbTotalVat.Text = "Label3"
+        '
         'home1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.lbTotalVat)
+        Me.Controls.Add(Me.lbTax)
         Me.Controls.Add(Me.btnLogout)
         Me.Controls.Add(Me.lbChange)
         Me.Controls.Add(Me.btnPay)
@@ -276,4 +298,6 @@ Partial Class home1
     Friend WithEvents btnPay As Button
     Friend WithEvents lbChange As Label
     Friend WithEvents btnLogout As Button
+    Friend WithEvents lbTax As Label
+    Friend WithEvents lbTotalVat As Label
 End Class

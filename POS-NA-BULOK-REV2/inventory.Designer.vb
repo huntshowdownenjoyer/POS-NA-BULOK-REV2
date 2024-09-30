@@ -23,14 +23,14 @@ Partial Class Inventory
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.btnADD = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.tbProductName = New System.Windows.Forms.TextBox()
         Me.tbCategory = New System.Windows.Forms.TextBox()
         Me.tbPrice = New System.Windows.Forms.TextBox()
         Me.tbQuantity = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.tbSupplier = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.lbID = New System.Windows.Forms.Label()
         Me.tbPID = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -38,8 +38,13 @@ Partial Class Inventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pictureBOX = New System.Windows.Forms.PictureBox()
-        Me.btnEDIT = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnADD = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnEDIT = New System.Windows.Forms.Button()
+        Me.btnAddProduct = New System.Windows.Forms.Button()
+        Me.btnMinusQuantity = New System.Windows.Forms.Button()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -51,26 +56,8 @@ Partial Class Inventory
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(36, 37)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(543, 372)
+        Me.DataGridView1.Size = New System.Drawing.Size(543, 315)
         Me.DataGridView1.TabIndex = 0
-        '
-        'btnADD
-        '
-        Me.btnADD.Location = New System.Drawing.Point(307, 415)
-        Me.btnADD.Name = "btnADD"
-        Me.btnADD.Size = New System.Drawing.Size(133, 23)
-        Me.btnADD.TabIndex = 1
-        Me.btnADD.Text = "ADD PRODUCT"
-        Me.btnADD.UseVisualStyleBackColor = True
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(446, 415)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(133, 23)
-        Me.btnDelete.TabIndex = 2
-        Me.btnDelete.Text = "DELETE PRODUCT"
-        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'tbProductName
         '
@@ -111,6 +98,8 @@ Partial Class Inventory
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.tbSupplier)
+        Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.lbID)
         Me.Panel2.Controls.Add(Me.tbPID)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -121,10 +110,27 @@ Partial Class Inventory
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.tbPrice)
         Me.Panel2.Controls.Add(Me.tbQuantity)
-        Me.Panel2.Location = New System.Drawing.Point(33, 147)
+        Me.Panel2.Location = New System.Drawing.Point(33, 131)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(145, 242)
+        Me.Panel2.Size = New System.Drawing.Size(145, 267)
         Me.Panel2.TabIndex = 12
+        '
+        'tbSupplier
+        '
+        Me.tbSupplier.FormattingEnabled = True
+        Me.tbSupplier.Location = New System.Drawing.Point(6, 243)
+        Me.tbSupplier.Name = "tbSupplier"
+        Me.tbSupplier.Size = New System.Drawing.Size(100, 21)
+        Me.tbSupplier.TabIndex = 16
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 230)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.TabIndex = 15
+        Me.Label5.Text = "Supplier"
         '
         'lbID
         '
@@ -181,35 +187,84 @@ Partial Class Inventory
         '
         'pictureBOX
         '
-        Me.pictureBOX.Location = New System.Drawing.Point(33, 16)
+        Me.pictureBOX.Location = New System.Drawing.Point(33, 0)
         Me.pictureBOX.Name = "pictureBOX"
         Me.pictureBOX.Size = New System.Drawing.Size(145, 125)
         Me.pictureBOX.TabIndex = 0
         Me.pictureBOX.TabStop = False
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'btnADD
+        '
+        Me.btnADD.Location = New System.Drawing.Point(307, 374)
+        Me.btnADD.Name = "btnADD"
+        Me.btnADD.Size = New System.Drawing.Size(133, 23)
+        Me.btnADD.TabIndex = 1
+        Me.btnADD.Text = "ADD PRODUCT"
+        Me.btnADD.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(446, 374)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(133, 23)
+        Me.btnDelete.TabIndex = 2
+        Me.btnDelete.Text = "DELETE PRODUCT"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
         'btnEDIT
         '
-        Me.btnEDIT.Location = New System.Drawing.Point(168, 415)
+        Me.btnEDIT.Location = New System.Drawing.Point(168, 374)
         Me.btnEDIT.Name = "btnEDIT"
         Me.btnEDIT.Size = New System.Drawing.Size(133, 23)
         Me.btnEDIT.TabIndex = 8
         Me.btnEDIT.Text = "EDIT PRODUCT"
         Me.btnEDIT.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
+        'btnAddProduct
         '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.btnAddProduct.Location = New System.Drawing.Point(36, 374)
+        Me.btnAddProduct.Name = "btnAddProduct"
+        Me.btnAddProduct.Size = New System.Drawing.Size(126, 23)
+        Me.btnAddProduct.TabIndex = 9
+        Me.btnAddProduct.Text = "ADD QUANTITY"
+        Me.btnAddProduct.UseVisualStyleBackColor = True
+        '
+        'btnMinusQuantity
+        '
+        Me.btnMinusQuantity.Location = New System.Drawing.Point(36, 415)
+        Me.btnMinusQuantity.Name = "btnMinusQuantity"
+        Me.btnMinusQuantity.Size = New System.Drawing.Size(126, 23)
+        Me.btnMinusQuantity.TabIndex = 10
+        Me.btnMinusQuantity.Text = "MINUS QUANTITY"
+        Me.btnMinusQuantity.UseVisualStyleBackColor = True
+        '
+        'btnAddSupplier
+        '
+        Me.btnAddSupplier.Location = New System.Drawing.Point(168, 415)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(126, 23)
+        Me.btnAddSupplier.TabIndex = 11
+        Me.btnAddSupplier.Text = "ADD SUPPLIER"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnAddSupplier)
+        Me.Controls.Add(Me.btnMinusQuantity)
+        Me.Controls.Add(Me.btnAddProduct)
         Me.Controls.Add(Me.btnEDIT)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnADD)
         Me.Controls.Add(Me.DataGridView1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Inventory"
         Me.Text = "inventory"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -222,8 +277,6 @@ Partial Class Inventory
     End Sub
 
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents btnADD As Button
-    Friend WithEvents btnDelete As Button
     Friend WithEvents tbProductName As TextBox
     Friend WithEvents tbCategory As TextBox
     Friend WithEvents tbPrice As TextBox
@@ -237,6 +290,13 @@ Partial Class Inventory
     Friend WithEvents Panel2 As Panel
     Friend WithEvents lbID As Label
     Friend WithEvents tbPID As TextBox
-    Friend WithEvents btnEDIT As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Label5 As Label
+    Friend WithEvents tbSupplier As ComboBox
+    Friend WithEvents btnADD As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnEDIT As Button
+    Friend WithEvents btnAddProduct As Button
+    Friend WithEvents btnMinusQuantity As Button
+    Friend WithEvents btnAddSupplier As Button
 End Class

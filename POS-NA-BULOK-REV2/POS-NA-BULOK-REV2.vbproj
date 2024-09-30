@@ -264,6 +264,12 @@
     <Compile Include="inventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="parentform.Designer.vb">
+      <DependentUpon>parentform.vb</DependentUpon>
+    </Compile>
+    <Compile Include="parentform.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Resources\Item.Designer.vb">
       <DependentUpon>Item.vb</DependentUpon>
     </Compile>
@@ -286,6 +292,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="supplierform.Designer.vb">
+      <DependentUpon>supplierform.vb</DependentUpon>
+    </Compile>
+    <Compile Include="supplierform.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -300,6 +312,9 @@
     <EmbeddedResource Include="inventory.resx">
       <DependentUpon>inventory.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="parentform.resx">
+      <DependentUpon>parentform.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Item.resx">
       <DependentUpon>Item.vb</DependentUpon>
     </EmbeddedResource>
@@ -308,6 +323,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="supplierform.resx">
+      <DependentUpon>supplierform.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

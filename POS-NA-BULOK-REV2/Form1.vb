@@ -1,11 +1,8 @@
 ﻿Imports System.Data.SqlClient
 
-
 Public Class Form1
     Private myConn As SqlConnection
-    Private myCmd As SqlCommand
-    Private myReader As SqlDataReader
-    Private results As String
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         myConn = New SqlConnection("Data Source=COMP68\SQLEXPRESS01;Initial Catalog=DBNABULOK;Persist Security Info=True;User ID=posnabulok;Password=passwordto")
     End Sub
@@ -13,34 +10,33 @@ Public Class Form1
     Private Sub btLogin_Click(sender As Object, e As EventArgs) Handles btLogin.Click
         Dim uname As String = tbUname.Text
         Dim pword As String = tbPword.Text
-        myConn = New SqlConnection("Data Source=COMP68\SQLEXPRESS01;Initial Catalog=DBNABULOK;Persist Security Info=True;User ID=posnabulok;Password=passwordto")
         Try
             myConn.Open()
-            Dim query As String = "SELECT COUNT(*) FROM dbo.TABLENABULOK WHERE USERNAME = '" & uname & "' AND PASSWORD = '" & pword & "'"
-            Dim command As New SqlCommand(query, myConn)
-            Dim result As Integer = Convert.ToInt32(command.ExecuteScalar())
+            Dim query As String = "SELECT COUNT(*) FROM dbo.TABLENABULOK WHERE USERNAME = @Username AND PASSWORD = @Password"
+            Using command As New SqlCommand(query, myConn)
+                command.Parameters.AddWithValue("@Username", uname)
+                command.Parameters.AddWithValue("@Password", pword)
 
-            If result > 0 And cbInventory.Checked Then
-                MessageBox.Show("Login successful!")
-                Inventory.Show()
-                Me.Hide()
-                myConn.Close()
-            ElseIf result > 0 Then
-                MessageBox.Show("Login successful!")
-                home1.Show()
-                Me.Hide()
-                myConn.Close()
-            Else
-                MessageBox.Show("Invalid username or password.")
-                myConn.Close()
+                Dim result As Integer = Convert.ToInt32(command.ExecuteScalar())
 
-            End If
-
+                If result > 0 Then
+                    MessageBox.Show("Login successful!")
+                    If cbInventory.Checked Then
+                        Dim inventoryForm As New Inventory()
+                        home1.Show()
+                    Else
+                        Dim parent As New parentform()
+                        parent.Show()
+                    End If
+                    Me.Hide()
+                Else
+                    MessageBox.Show("Invalid username or password.")
+                End If
+            End Using
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message)
+        Finally
+            myConn.Close()
         End Try
     End Sub
-
-
 End Class
-
